@@ -12,11 +12,12 @@ const topicId = process.env.TOPIC_ID
 
 app.use(bodyParser.json());
 
-
 app.post('/mqtt-webhook', async (req, res) => {
     try {
         const message = req.body;
 
+        console.log(message)
+        
         const clientConnectMessage = `Client connected: ${message.clientid}`;
 
         await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -31,6 +32,9 @@ app.post('/mqtt-webhook', async (req, res) => {
         res.status(500).send('Failed to send message');
     }
 });
+app.get('/test', async (req, res) => {
+    res.status(200).send('Notification sent to Telegram');
+})
 app.get('/test', async (req, res) => {
     res.status(200).send('Notification sent to Telegram');
 })
