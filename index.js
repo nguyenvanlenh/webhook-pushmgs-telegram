@@ -33,6 +33,7 @@ app.post('/mqtt-webhook', async (req, res) => {
     }
 });
 app.get('/test', async (req, res) => {
+    console.log("Hi")
     res.status(200).send('Notification sent to Telegram');
 })
 
