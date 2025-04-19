@@ -20,11 +20,11 @@ app.post('/mqtt-webhook', async (req, res) => {
         
         const clientConnectMessage = `Client connected: ${message.clientid}`;
 
-        await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            chat_id: chatId,
-            text: clientConnectMessage,
-            message_thread_id: topicId
-        });
+        // await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        //     chat_id: chatId,
+        //     text: clientConnectMessage,
+        //     message_thread_id: topicId
+        // });
 
         res.status(200).send('Notification sent to Telegram');
     } catch (error) {
@@ -32,9 +32,6 @@ app.post('/mqtt-webhook', async (req, res) => {
         res.status(500).send('Failed to send message');
     }
 });
-app.get('/test', async (req, res) => {
-    res.status(200).send('Notification sent to Telegram');
-})
 app.get('/test', async (req, res) => {
     res.status(200).send('Notification sent to Telegram');
 })
