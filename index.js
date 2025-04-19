@@ -16,6 +16,7 @@ app.post('/mqtt-webhook', async (req, res) => {
     try {
         const message = req.body;
 
+        console.log("Prop": {port, topicId})
         console.log(message)
         
         const clientConnectMessage = `Client connected: ${message.clientid}`;
