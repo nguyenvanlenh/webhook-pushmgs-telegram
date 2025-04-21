@@ -23,7 +23,7 @@ app.post('/mqtt-webhook', async (req, res) => {
         const clientConnectMessage = `Client connected: 
                 client id: ${message.clientid}, 
                 username: ${message.username || 'unknown'}, 
-                ip: ${message.ip}, 
+                ip: ${message.peername}, 
                 connected at: ${formatVietnamTime(message.connected_at)}`;
 
         await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
