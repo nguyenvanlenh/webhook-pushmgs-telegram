@@ -22,7 +22,7 @@ app.post('/mqtt-webhook', async (req, res) => {
 
         const clientConnectMessage = `Client connected: 
                 client id: ${message.clientid}, 
-                username: ${message.username}, 
+                username: ${message.username || 'unknown'}, 
                 ip: ${message.ip}, 
                 connected at: ${formatVietnamTime(message.connected_at)}`;
 
