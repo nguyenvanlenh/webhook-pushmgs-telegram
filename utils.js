@@ -1,4 +1,5 @@
-export function formatVietnamTime(timestamp) {
+// utils.js
+function formatVietnamTime(timestamp) {
     const date = new Date(timestamp);
 
     const options = {
@@ -8,10 +9,13 @@ export function formatVietnamTime(timestamp) {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: false,
+        hour12: false, // Sử dụng định dạng 24 giờ
+        timeZone: 'Asia/Ho_Chi_Minh' // Đảm bảo sử dụng múi giờ Việt Nam (UTC+7)
     };
 
     const vietnamTime = new Intl.DateTimeFormat('vi-VN', options).format(date);
 
     return vietnamTime;
 }
+
+module.exports = { formatVietnamTime };
