@@ -15,7 +15,7 @@ function formatVietnamTime(timestamp) {
 
     const vietnamTime = new Intl.DateTimeFormat('vi-VN', options).format(date);
 
-    return vietnamTime;
+    return vietnamTime.toString();
 }
 
 module.exports = { formatVietnamTime };
