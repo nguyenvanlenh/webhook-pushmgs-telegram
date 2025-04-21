@@ -13,8 +13,6 @@ const topicId = process.env.TOPIC_ID
 
 app.use(bodyParser.json());
 
-console.log(formatVietnamTime(1745205162773));
-
 
 app.post('/mqtt-webhook', async (req, res) => {
     try {
