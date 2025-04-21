@@ -1,7 +1,8 @@
 require('dotenv').config();
 const axios = require('axios')
 const express = require('express')
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const { formatVietnamTime } = require('./utils');
 
 const app = express();
 const port = process.env.PORT || 3000
@@ -22,7 +23,7 @@ app.post('/mqtt-webhook', async (req, res) => {
                 client id: ${message.clientid}, 
                 username: ${message.username}, 
                 ip: ${message.ip}, 
-                connected at: ${message.connected_at}`;
+                connected at: ${formatVietnamTime(message.connected_at)}`;
 
         await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             chat_id: chatId,
