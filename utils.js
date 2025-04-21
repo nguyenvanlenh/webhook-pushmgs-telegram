@@ -1,10 +1,8 @@
 function formatVietnamTime(timestamp) {
-    // Kiểm tra nếu timestamp là chuỗi, chuyển nó thành số
     if (typeof timestamp === 'string') {
         timestamp = Number(timestamp);
     }
 
-    // Kiểm tra xem timestamp có phải là số và hợp lệ không
     if (isNaN(timestamp) || timestamp <= 0) {
         console.error("Invalid timestamp:", timestamp);
         return "Invalid time";
@@ -12,7 +10,6 @@ function formatVietnamTime(timestamp) {
 
     const date = new Date(timestamp);
 
-    // Kiểm tra nếu đối tượng Date không hợp lệ
     if (isNaN(date.getTime())) {
         console.error("Invalid date:", date);
         return "Invalid time";
@@ -25,7 +22,7 @@ function formatVietnamTime(timestamp) {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: false, // Sử dụng định dạng 24 giờ
+        hour12: false, // Using format 24h
         timeZone: 'Asia/Ho_Chi_Minh'
     };
 

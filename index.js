@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const { formatVietnamTime } = require('./utils');
 
 const app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 
 const botToken = process.env.BOT_TOKEN
 const chatId = process.env.CHAT_ID
@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 app.post('/mqtt-webhook', async (req, res) => {
     try {
         const message = req.body;
-        console.log("Hi post")
         console.log(message)
 
         const clientConnectMessage = `Client connected: 
@@ -39,7 +38,6 @@ app.post('/mqtt-webhook', async (req, res) => {
     }
 });
 app.get('/test', async (req, res) => {
-    console.log("Hi")
     res.status(200).send('Notification sent to Telegram');
 })
 
