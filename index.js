@@ -18,9 +18,9 @@ app.post('/mqtt-webhook', async (req, res) => {
         console.log('Received request:', req.body);
         const { clientid, username, peername, connected_at } = req.body;
 
-        const clientConnectMessage = `Client connected: 
+        const clientConnectMessage = `Client connected to Test: 
             client id: ${clientid}, 
-            username: ${username || 'unknown'}, 
+            username: ${username || 'undefined'}, 
             ip: ${peername}, 
             connected at: ${formatVietnamTime(connected_at)}`;
 
