@@ -4,15 +4,15 @@ function formatVietnamTime(timestamp) {
     }
 
     if (isNaN(timestamp) || timestamp <= 0) {
-        console.error("Invalid timestamp:", timestamp);
-        return "Invalid time";
+        console.error('Invalid timestamp:', timestamp);
+        return 'Invalid time';
     }
 
     const date = new Date(timestamp);
 
     if (isNaN(date.getTime())) {
-        console.error("Invalid date:", date);
-        return "Invalid time";
+        console.error('Invalid date:', date);
+        return 'Invalid time';
     }
 
     const options = {
@@ -22,14 +22,16 @@ function formatVietnamTime(timestamp) {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: false, // Using format 24h
-        timeZone: 'Asia/Ho_Chi_Minh'
+        hour12: false, // 24-hour format
+        timeZone: 'Asia/Ho_Chi_Minh',
     };
 
-    const vietnamTime = new Intl.DateTimeFormat('vi-VN', options).format(date);
-
-    return vietnamTime.toString();
+    try {
+        return new Intl.DateTimeFormat('vi-VN', options).format(date);
+    } catch (error) {
+        console.error('Intl.DateTimeFormat error:', error.message);
+        return 'Invalid time';
+    }
 }
-
 
 module.exports = { formatVietnamTime };
