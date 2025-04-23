@@ -24,11 +24,11 @@ app.post('/mqtt-webhook', async (req, res) => {
             ip: ${peername}, 
             connected at: ${formatVietnamTime(connected_at)}`;
 
-        // await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        //     chat_id: chatId,
-        //     text: clientConnectMessage,
-        //     message_thread_id: topicId,
-        // });
+        await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            chat_id: chatId,
+            text: clientConnectMessage,
+            message_thread_id: topicId,
+        });
 
         res.status(200).send('Notification sent to Telegram');
     } catch (error) {
