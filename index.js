@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 const express = require('express');
 const bodyParser = require('body-parser');
-const { formatVietnamTime } = require('./utils');
+const { formatVietnamTime, isSuspicious } = require('./utils');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -12,6 +12,8 @@ const chatId = process.env.CHAT_ID;
 const topicId = process.env.TOPIC_ID;
 
 app.use(bodyParser.json());
+
+
 
 app.post('/mqtt-webhook', async (req, res) => {
     try {
@@ -23,7 +25,10 @@ app.post('/mqtt-webhook', async (req, res) => {
             username: ${username || 'undefined'}, 
             ip: ${peername}, 
             connected at: ${formatVietnamTime(connected_at)}`;
-
+        if (isSuspicious(clientid)) {
+            console.log('Suspicious client ID detected:', clientid);
+            return res.status(400).send('Suspicious client ID');
+        }
         await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             chat_id: chatId,
             text: clientConnectMessage,

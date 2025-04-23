@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 function formatVietnamTime(timestamp) {
     if (typeof timestamp === 'string') {
         timestamp = Number(timestamp);
@@ -33,5 +35,30 @@ function formatVietnamTime(timestamp) {
         return 'Invalid time';
     }
 }
+function isSuspicious(clientId) {
+    const length = clientId.length;
 
-module.exports = { formatVietnamTime };
+    const isRandomLikeLength = length >= 16 && length <= 32;
+
+    const hasUpper = /[A-Z]/.test(clientId);
+    const hasLower = /[a-z]/.test(clientId);
+    const hasDigit = /\d/.test(clientId);
+    const isAlphanumeric = /^[a-zA-Z0-9]+$/.test(clientId);
+
+    // Tính tỉ lệ chữ số
+    const digitRatio = (clientId.match(/\d/g) || []).length / length;
+    const upperRatio = (clientId.match(/[A-Z]/g) || []).length / length;
+    const lowerRatio = (clientId.match(/[a-z]/g) || []).length / length;
+
+    return (
+        isRandomLikeLength &&
+        isAlphanumeric &&
+        hasUpper &&
+        hasLower &&
+        hasDigit &&
+        digitRatio < 0.5 &&
+        upperRatio < 0.6 &&
+        lowerRatio < 0.6
+    );
+}
+module.exports = { formatVietnamTime, isSuspicious };
